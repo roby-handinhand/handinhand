@@ -1,2 +1,3 @@
 # handinhand
-Hand in Hand International Website
+On your local file system, rename .env.sample to .env and set your values.
+
