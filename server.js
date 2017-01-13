@@ -2,6 +2,8 @@
 
 // set up ======================================================================
 // get all the tools we need
+var env = require('node-env-file');
+env(__dirname + '/.env');
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span>Children to Sponsor
+			<% if (contacts.length > 0) { %>
+					(<%= contacts.length %>)
+			<% } %>
+		</h1>
+		<%- include partial/navigation.ejs %>
+	</div>
+
+	<div class="row">
+
+		<div class="col-sm-6">
+			<% if (contacts.length > 0) { %>
+				<h2>
+				</h2>
+				<table>
+					<thead>
+						<tr>
+							<% var cols = Object.keys(contacts[0].dataValues);
+							   for (var i=0; i < cols.length; i++) { %>
+								   <th><%= cols[i] %></th>
+						    <% } %>
+						</tr>
+					</thead>
+					<tbody>
+						<% for (var i=0; i < contacts.length; i++) { %>
+							<tr>
+							<% for (var c=0; c < cols.length; c++) {
+								var cell = contacts[i][cols[c]];
+								if (cell && cell.trim) {
+									cell = cell.trim();
+								}
+							    %>
+								<td>
+									<%= cell %>
+							    </td>
+							<% } %>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+			<% } else { %>
+				No children found
+			<% } %>
+		</div>
+
+</div>
+</body>
+</html>
