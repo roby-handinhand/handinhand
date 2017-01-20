@@ -1,3 +1,5 @@
+var data = require('./data.js');
+
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
@@ -19,6 +21,24 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+
+    // View Contacts (still WIP)
+	var orphan_list_fields = ['name', 'sex__c', 'orphan_status__c', 'category__c', 'extended_family__c'];
+    app.get('/children', isLoggedIn, function(req, res) {
+		// TODO: There should be a way to do this in 1 query
+		data.RecordType.findOne({attributes: ['sfid'], where: {'developername': 'Child', 'sobjecttype': 'Contact'}}).then(function(childRecordType) {
+	        data.Contact.findAll({
+				attributes: orphan_list_fields,
+				where: {
+					'recordtypeid': childRecordType.sfid
+				}
+			}).then(function(contacts) {
+				res.render('children.ejs', {
+					contacts: contacts
+				});
+	        });
+		});
+    });
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================

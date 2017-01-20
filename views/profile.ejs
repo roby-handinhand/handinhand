@@ -12,30 +12,30 @@
 
 	<div class="page-header text-center">
 		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+		<%- include partial/navigation.ejs %>
 	</div>
 
 	<div class="row">
 
 		<div class="col-sm-6">
 			<div class="well">
-				<% if (user.localemail) { %>
+				<% if (user.local_email) { %>
 				<h3><span class="fa fa-user"></span> Local</h3>
 					<p>
-						<strong>email</strong>: <%= user.localemail %><br>
+						<strong>email</strong>: <%= user.local_email %><br>
 					</p>
 
-				<% } else if (user.facebooktoken){ %>
+				<% } else if (user.facebook_token){ %>
 				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
 					<p>
-						<strong>email</strong>: <%= user.facebookemail %><br>
-						<strong>name</strong>: <%= user.facebookname %><br>
+						<strong>email</strong>: <%= user.facebook_email %><br>
+						<strong>name</strong>: <%= user.facebook_name %><br>
 					</p>
-				<% } else if (user.googletoken){ %>
+				<% } else if (user.google_token){ %>
 				<h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
 					<p>
-						<strong>email</strong>: <%= user.googleemail %><br>
-						<strong>name</strong>: <%= user.googlename %>
+						<strong>email</strong>: <%= user.google_email %><br>
+						<strong>name</strong>: <%= user.google_name %>
 				</p>
 				<% } %>
 
