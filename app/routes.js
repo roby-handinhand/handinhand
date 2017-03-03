@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
-    // View Contacts (still WIP)
+    // View All Children
 	var orphan_list_fields = ['name', 'sex__c', 'orphan_status__c', 'category__c', 'extended_family__c'];
     app.get('/children', isLoggedIn, function(req, res) {
 		// TODO: There should be a way to do this in 1 query
@@ -39,6 +39,18 @@ module.exports = function(app, passport) {
 	        });
 		});
     });
+
+	// View the children I'm sponsoring
+	var sponsorship_list_fields = ['contact.name', 'sponsorship.begin_date__c', 'sponsorship.end_date__c', 'sponsorship.sponsorship_amount__c'];
+	app.get('/sponsorship', isLoggedIn, function(req, res) {
+		data.Utils.getSponsoredChildrenForUser(req.user, sponsorship_list_fields).then(function(sponsored) {
+			console.log("Rendering sponsored children: " + JSON.stringify(sponsored));
+			res.render('generic_object.ejs', {
+				data: sponsored,
+				pageTitle: "My Sponsored Children"
+			});
+		});
+	});
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
