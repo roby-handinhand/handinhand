@@ -1,10 +1,3 @@
-// file app/models/contact.js
-// define the model for User
-
-
-// load the things we need
-
-var bcrypt   = require('bcrypt-nodejs');
 
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('contact', {
@@ -57,5 +50,3 @@ module.exports = function(sequelize, DataTypes) {
         */
     });
 }
-
-
